@@ -18,6 +18,7 @@ import java.util.List;
 @Table(name="library_card")
 public class LibraryCard {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer cardNo;
 
     @Enumerated(value= EnumType.STRING)
