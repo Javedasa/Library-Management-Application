@@ -21,6 +21,7 @@ public class Book {
     private Integer bookId;
 
    private String bookName;
+
    private int price;
    private int numOfPages;
 

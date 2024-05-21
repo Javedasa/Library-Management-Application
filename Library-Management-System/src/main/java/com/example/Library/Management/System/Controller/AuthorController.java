@@ -3,7 +3,6 @@ package com.example.Library.Management.System.Controller;
 import com.example.Library.Management.System.Entities.Author;
 import com.example.Library.Management.System.Services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,30 +16,30 @@ public class AuthorController {
     private AuthorService authorService;
 
     @PostMapping("/add")
-    public ResponseEntity<String> addAuthor(@RequestBody Author author){
-        String result=authorService.addAuthor(author);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    public ResponseEntity<String> addAuthor(@RequestBody Author author) {
+        ResponseEntity<String> response = authorService.addAuthor(author);
+        return response;
     }
 
     @GetMapping("/getAuthor")
-    public ResponseEntity getAuthor(@RequestParam("authorId")Integer authorId){
-        try{
-            Author author=authorService.getAuthor(authorId);
-            return new ResponseEntity(author , HttpStatus.OK);
-        }
-        catch(Exception e){
-            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Author> getAuthor(@RequestParam("authorId") Integer authorId) {
+        try {
+            Author author = authorService.getAuthor(authorId);
+            return new ResponseEntity<>(author, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/findAllAuthorNames")
-    public List<String> getAllAuthorNames(){
-       return authorService.getAllAuthorNames();
+    public ResponseEntity<List<String>> getAllAuthorNames() {
+        List<String> authorNames = authorService.getAllAuthorNames();
+        return new ResponseEntity<>(authorNames, HttpStatus.OK);
     }
 
     @GetMapping("/getBookNameList")
-    public ResponseEntity getBookNameList(@RequestParam("authorId")Integer authorId){
-        List<String>bookNames=authorService.getBookNameList(authorId);
-        return new ResponseEntity(bookNames,HttpStatus.OK);
+    public ResponseEntity<List<String>> getBookNameList(@RequestParam("authorId") Integer authorId) {
+        List<String> bookNames = authorService.getBookNameList(authorId);
+        return new ResponseEntity<>(bookNames, HttpStatus.OK);
     }
 }

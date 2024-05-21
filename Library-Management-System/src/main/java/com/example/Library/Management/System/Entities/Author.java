@@ -22,7 +22,9 @@ public class Author {
     private Integer authorId;
     @Column(nullable = false)
     private String authorName;
+
     private int age;
+
     private double rating;
     @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
     private List<Book> bookList=new ArrayList<>();
